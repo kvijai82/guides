@@ -189,7 +189,7 @@ The [deploy-kustomize-pl.yaml](https://github.com/kabanero-io/kabanero-pipelines
 
 ### Events pipelines
 
-The pipelines can be associated with an application stack in the Kabanero custom resource definition (CRD). For example:
+The pipelines can be associated with an application stack in the Kabanero custom resource definition (CRD). Locate the `kabanero-events-pipelines.tar.gz` file for the release and update the pipelines section with the url & sha256 values (available in the kabanero-events-pipelines-tar-gz-sha256 file) for the release to use the events pipelines.  For example:
 
 ```yaml
 apiVersion: kabanero.io/v1alpha1
@@ -211,6 +211,8 @@ spec:
 ```
 
 When the product operator activates the Kabanero CRD, it associates the pipelines in the pipelines archive with each of the stacks in the stack hub. The default pipelines are intended to work with all the stacks in the stack hub in the previous example. When the operator activates all the pipeline resources (such as the tasks, trigger bindings, and pipelines) in the archive, it adds a suffix to the name of the resource with the shorted digest of the pipelines archive. This configuration provides an easy way to have multiple versions of the same pipeline to be active on the cluster.
+
+Please note the `deploy-kustomize` task & pipeline included as a tech preview do not have a digest suffix appended to end of the name and will be expected to use the same code if there are multiple pipeline release activated with the same name.
 
 ### Incubator pipelines
 
